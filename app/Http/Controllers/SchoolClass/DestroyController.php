@@ -5,15 +5,13 @@ namespace App\Http\Controllers\SchoolClass;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EditController extends Controller
+class DestroyController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, string $id)
     {
-        {
-        return "Mengedit kelas dengan ID: {id}";
-    }
+        return "Menghapus kelas dengan ID: {id}";
     }
 }
