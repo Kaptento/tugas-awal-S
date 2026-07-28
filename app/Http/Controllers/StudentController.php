@@ -18,27 +18,27 @@ class StudentController extends Controller
 
     public function create()
     {
-        return "ini adalah halaman untuk tambah data siswa";
+        return "Menampilkan halaman untuk tambah data siswa";
     }
 
     public function edit(string $id)
     {
-        return "ini adalah halaman untuk edit data  siswa dengan ID: {$id}";
+        return "Menampilkan halaman edit siswa";
     }
 
     public function store(Request $request)
     {
-        return "ini adalah halaman untuk menambah data siswa baru";
+        return "Melakukan penambahan data siswa baru";
     }
 
     public function update(Request $request, string $id)
     {
-        return "mengubah data siswa dengan ID: {$id}";
+        return "Melakukan perubahan data siswa";
     }
 
     public function destroy(string $id)
     {
-        return "menghapus data siswa dengan ID: {$id}";
+        return "Menghapus data siswa";
     }
 }
 
