@@ -13,7 +13,8 @@ class EditController extends Controller
     public function __invoke(Request $request)
     {
         {
-        return "Menampilkan halaman edit siswa";
+        return "Menampilkan halaman edit kelas";
+        }
     }
     }
-}
+
