@@ -17,6 +17,13 @@ class StudentController extends Controller
                 'class' => 'XII AKL 1',
                 'major' => 'RPL',
             ],
+            [
+                'id' => 2,
+                'nis' => '2024002',
+                'name' => 'Juan',
+                'class' => 'XI AKL 2',
+                'major' => 'AKL',
+            ],
         ];
         
 

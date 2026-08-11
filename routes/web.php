@@ -45,14 +45,14 @@ Route::prefix('teachers')->name('teachers.')->group(function () {
     // Halaman Daftar Guru
     Route::get('/', [TeacherController::class, 'index'])->name('index');
  
-    // Halaman Detail Guru
-    Route::get('/{id}', [TeacherController::class, 'show'])->name('show');
- 
     // Halaman Tambah Guru
     Route::get('/create', [TeacherController::class, 'create'])->name('create');
  
     // Halamann Edit Guru
     Route::get('/{id}/edit', [TeacherController::class, 'edit'])->name('edit');
+ 
+    // Halaman Detail Guru
+    Route::get('/{id}', [TeacherController::class, 'show'])->name('show');
  
     // Logika Tambah Guru
     Route::post('/', [TeacherController::class, 'store'])->name('store');

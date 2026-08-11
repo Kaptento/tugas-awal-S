@@ -35,15 +35,17 @@
 
             <th class="w-14 px-5 py-3.5 font-semibold">No.</th> 
 
+            <th class="w-14 px-5 py-3.5 font-semibold">ID</th> 
+
             <th class="px-5 py-3.5 font-semibold">NIP</th> 
 
             <th class="px-5 py-3.5 font-semibold">Nama Guru</th> 
 
-            <th class="px-5 py-3.5 font-semibold">Gender</th> 
+            <th class="px-5 py-3.5 font-semibold">Jenis Kelamin</th> 
 
-            <th class="px-5 py-3.5 font-semibold">Subject</th> 
+            <th class="px-5 py-3.5 font-semibold">Mata Pelajaran</th> 
 
-            <th class="px-5 py-3.5 font-semibold">Phone</th>
+            <th class="px-5 py-3.5 font-semibold">No. Telepon</th>
 
             <th class="px-5 py-3.5 font-semibold">Status</th>
 
@@ -57,12 +59,19 @@
           @forelse ($teachers as $index => $teacher)
             <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
               <td class="px-5 py-4 font-display text-lg text-[#A16207]">{{ $index + 1 }}</td>
+              <td class="px-5 py-4 font-mono text-xs text-slate-500">{{ $teacher['id'] }}</td>  
               <td class="px-5 py-4 font-mono text-xs text-slate-500">{{ $teacher['nip'] }}</td>
               <td class="px-5 py-4 font-medium text-[#16213A]">{{ $teacher['name'] }}</td>
               <td class="px-5 py-4">{{ $teacher['gender'] }}</td>
               <td class="px-5 py-4">{{ $teacher['subject'] }}</td>
-              <td class="px-5 py-4">{{ $teacher['phone'] }}</td>
-              <td class="px-5 py-4">{{ $teacher['status'] }}</td>
+              <td class="px-5 py-4">{{ $teacher['phone_number'] }}</td>
+              <td class="px-5 py-4">
+
+              <x-status-badge type="{{ $teacher['status'] }}" >
+              {{ $teacher['status'] }}
+              </x-status-badge>
+
+            </td>
               <td class="px-5 py-4">
                 <div class="flex justify-end gap-4 text-xs font-medium">
                   <a href="{{ route('teachers.show', ['id' => $teacher['id']]) }}" class="text-[#16213A] hover:text-[#A16207]">Lihat</a>

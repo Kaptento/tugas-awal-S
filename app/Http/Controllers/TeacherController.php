@@ -16,7 +16,7 @@ class TeacherController extends Controller
       'name' => 'Budi Santoso',
       'gender' => 'Laki-Laki',
       'subject' => 'Akuntansi Dasar',
-      'phone' => '081234560001',
+      'phone_number' => '081234560001',
       'status' => 'Aktif',
     ],
     [
@@ -25,7 +25,7 @@ class TeacherController extends Controller
       'name' => 'Siti Aminah',
       'gender' => 'Perempuan',
       'subject' => 'Jaringan Komputer',
-      'phone' => '081234560002',
+      'phone_number' => '081234560002',
       'status' => 'Aktif',
     ]
 ];
@@ -38,17 +38,49 @@ class TeacherController extends Controller
 
     public function show(string $id)
     {
-        return "Menampilkan detail guru dengan ID : {$id}";
+        $title = 'Sistem Sekolah - Detail Guru';
+        $teacher = [
+            'id' => $id,
+            'nip' => '198501012024',
+            'name' => 'Budi Santoso',
+            'gender' => 'Laki-Laki',
+            'subject' => 'Akuntansi Dasar',
+            'phone_number' => '081234560001',
+            'status' => 'Aktif',
+        ];
+
+        return view('teachers.show', [
+            'title' => $title,
+            'teacher' => $teacher,
+        ]);
     }
 
     public function create()
     {
-        return "Menampilkan halaman untuk tambah data guru";
+        $title = 'Sistem Sekolah - Tambah Guru';
+
+        return view('teachers.create', [
+            'title' => $title,
+        ]);
     }
 
     public function edit(string $id)
     {
-        return "Menampilkan halaman edit guru";
+        $title = 'Sistem Sekolah - Edit Guru';
+        $teacher = [
+            'id' => $id,
+            'nip' => '198501012024',
+            'name' => 'Budi Santoso',
+            'gender' => 'Laki-Laki',
+            'subject' => 'Akuntansi Dasar',
+            'phone_number' => '081234560001',
+            'status' => 'Aktif',
+        ];
+
+        return view('teachers.edit', [
+            'title' => $title,
+            'teacher' => $teacher,
+        ]);
     }
 
     public function store(Request $request)
