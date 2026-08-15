@@ -64,22 +64,37 @@ Route::prefix('teachers')->name('teachers.')->group(function () {
     Route::delete('/{id}', [TeacherController::class, 'destroy'])->name('destroy');
 });
  
-Route::resource('majors', MajorController::class);
- 
-Route::prefix('classes')->name('classes.')->group(function () {
- 
+Route::name('classes.')->prefix('classes')->group(function () {
+
     Route::get('/', IndexController::class)->name('index');
- 
-    Route::get('/{id}', ShowController::class)->name('show');
- 
+
     Route::get('/create', CreateController::class)->name('create');
- 
+    
+    Route::get('/{id}', ShowController::class)->name('show');
+
     Route::get('/{id}/edit', EditController::class)->name('edit');
- 
-    Route::post('/', StoreController::class)->name('store');
- 
+
+    Route::post('/store', StoreController::class)->name('store');
+
     Route::put('/{id}', UpdateController::class)->name('update');
- 
+
     Route::delete('/{id}', DestroyController::class)->name('destroy');
- 
+});
+
+
+Route::name('majors.')->prefix('majors')->group(function () {
+
+    Route::get('/', [MajorController::class, 'index'])->name('index');
+
+    Route::post('/store', [MajorController::class, 'store'])->name('store');
+    
+    Route::get('/create', [MajorController::class, 'create'])->name('create');
+
+    Route::get('/{id}', [MajorController::class, 'show'])->name('show');
+
+    Route::get('/{id}/edit', [MajorController::class, 'edit'])->name('edit');
+
+    Route::put('/{id}', [MajorController::class, 'update'])->name('update');
+
+    Route::delete('/{id}', [MajorController::class, 'destroy'])->name('destroy');
 });
