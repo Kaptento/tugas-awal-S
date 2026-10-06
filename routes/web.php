@@ -17,27 +17,27 @@ Route::get('/', function () {
 });
  
 Route::prefix('students')->name('students.')->group(function () {
- 
+
     // Halaman Daftar Siswa
     Route::get('/', [StudentController::class, 'index'])->name('index');
- 
+
     // Halaman Tambah Siswa
     Route::get('/create', [StudentController::class, 'create'])->name('create');
- 
+
     // Halamann Edit Siswa
-    Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('edit');
- 
+    Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('edit');
+
     // Halaman Detail Siswa
-    Route::get('/{id}', [StudentController::class, 'show'])->name('show');
- 
+    Route::get('/{student}', [StudentController::class, 'show'])->name('show');
+
     // Logika Tambah Siswa
     Route::post('/', [StudentController::class, 'store'])->name('store');
- 
+
     // Logika Edit Siswa
-    Route::put('/{id}', [StudentController::class, 'update'])->name('update');
- 
+    Route::put('/{student}', [StudentController::class, 'update'])->name('update');
+
     // Logika Hapus Siswa
-    Route::delete('/{id}', [StudentController::class, 'destroy'])->name('destroy');
+    Route::delete('/{student}', [StudentController::class, 'destroy'])->name('destroy');
 });
  
 Route::prefix('teachers')->name('teachers.')->group(function () {
