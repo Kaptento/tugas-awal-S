@@ -11,11 +11,19 @@ use App\Http\Controllers\SchoolClass\StoreController;
 use App\Http\Controllers\SchoolClass\UpdateController;
 use App\Http\Controllers\SchoolClass\DestroyController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
  
 Route::get('/', function () {
     return view('welcome');
 });
  
+//Auth
+Route::get('/login', [AuthController::class, 'loginview'])->name('login-view');
+Route::post('/login', [AuthController::class, 'loginpost'])->name('login-post');
+Route::get('/register', [AuthController::class, 'registerview'])->name('register-view');
+Route::post('/register', [AuthController::class, 'registerpost'])->name('register-post');
+
+
 Route::prefix('students')->name('students.')->group(function () {
 
     // Halaman Daftar Siswa
