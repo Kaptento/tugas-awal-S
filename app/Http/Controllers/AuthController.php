@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+
 
 use Illuminate\Http\Request;
 
@@ -13,22 +15,22 @@ class AuthController extends Controller
 
     public function loginpost(Request $request)
     {
-        // // Validasi input
-        // $credentials = $request->validate([
-        //     'email' => ['required', 'email'],
-        //     'password' => ['required'],
-        // ]);
+        // Validasi input
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        // // Coba login
-        // if (auth()->attempt($credentials)) {
-        //     $request->session()->regenerate();
-        //     return redirect()->intended('/dashboard');
-        // }
+        // Coba login
+        if (auth()->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('students.index');
+        }
 
-        // // Jika gagal login
-        // return back()->withErrors([
-        //     'email' => 'The provided credentials do not match our records.',
-        // ]);
+        // Jika gagal login
+        return back()->withErrors([
+            'email' => 'Email or Password do not match our records.',
+        ]);
     }
 
     public function registerview()
@@ -36,25 +38,34 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function registerpost(Request $request)
+    public function registerPost(Request $request)
     {
-        // // Validasi input
-        // $validatedData = $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        // ]);
+        // Validate Request
+        $validatedRequest = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
 
-        // // Buat user baru
-        // $user = \App\Models\User::create([
-        //     'name' => $validatedData['name'],
-        //     'email' => $validatedData['email'],
-        //     'password' => bcrypt($validatedData['password']),
-        // ]);
+        // Send Data
+        User::create([
+            'name' => $validatedRequest['name'],
+            'email' => $validatedRequest['email'],
+            'password' => bcrypt($validatedRequest['password']),
+            'role' => 'student'
+        ]);
 
-        // // Login user baru
-        // auth()->login($user);
+        // Handle If Success
+        return redirect()->route('login-view');
+    
+    }
 
-        // return redirect('/dashboard');
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect()->route('login-view');
     }
 }
