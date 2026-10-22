@@ -42,13 +42,13 @@
                 </td>
                 <td class="px-5 py-4">
                     <div class="flex justify-end gap-4 text-xs font-medium">
-                        <a href="{{ route('majors.show', ['id' => $major['id']]) }}" class="text-[#16213A] hover:text-[#A16207]">Lihat</a>
-                        <a href="{{ route('majors.edit', ['id' => $major['id']]) }}" class="text-[#16213A] hover:text-[#A16207]">Ubah</a>
-                        <form action="{{ route('majors.destroy', ['id' => $major['id']]) }}" method="POST"
+                        <a href="{{ route('majors.show', ['major' => $major['id']]) }}" class="text-[#16213A] hover:text-[#A16207]">Lihat</a>
+                        <a href="{{ route('majors.edit', ['major' => $major['id']]) }}" class="text-[#16213A] hover:text-[#A16207]">Ubah</a>
+                        <form action="{{ route('majors.destroy', ['major' => $major['id']]) }}" method="POST"
                             onsubmit="return confirm('Hapus data jurusan ini dari buku induk?')">
 
                             <button type="submit" class="text-red-700 hover:text-red-900">Hapus</button>
-                        </form>
+                        </form> 
                     </div>
                 </td>
             </tr>

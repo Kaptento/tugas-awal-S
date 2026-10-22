@@ -18,37 +18,30 @@ Route::get('/', function () {
 });
  
 //Auth
-Route::get('/login', [AuthController::class, 'loginview'])->name('login-view');
-Route::post('/login', [AuthController::class, 'loginpost'])->name('login-post');
-Route::get('/register', [AuthController::class, 'registerview'])->name('register-view');
-Route::post('/register', [AuthController::class, 'registerpost'])->name('register-post');
-Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/login', [AuthController::class, 'loginview'])->name('login-view')->middleware('guest');
+Route::post('/login', [AuthController::class, 'loginpost'])->name('login-post')->middleware('guest');
+Route::get('/register', [AuthController::class, 'registerview'])->name('register-view')->middleware('guest');
+Route::post('/register', [AuthController::class, 'registerpost'])->name('register-post')->middleware('guest');
+Route::delete('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::prefix('students')->name('students.')->group(function () {
-
+Route::name('students.')->middleware('role:student,teacher', 'auth')->prefix('students')->group(function () {
     // Halaman Daftar Siswa
     Route::get('/', [StudentController::class, 'index'])->name('index');
-
     // Halaman Tambah Siswa
     Route::get('/create', [StudentController::class, 'create'])->name('create');
-
     // Halamann Edit Siswa
     Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('edit');
-
     // Halaman Detail Siswa
     Route::get('/{student}', [StudentController::class, 'show'])->name('show');
-
     // Logika Tambah Siswa
     Route::post('/', [StudentController::class, 'store'])->name('store');
-
     // Logika Edit Siswa
     Route::put('/{student}', [StudentController::class, 'update'])->name('update');
-
     // Logika Hapus Siswa
     Route::delete('/{student}', [StudentController::class, 'destroy'])->name('destroy');
 });
  
-Route::prefix('teachers')->name('teachers.')->group(function () {
+Route::name('teachers.')->middleware('role:teacher')->prefix('teachers')->group(function () {
  
     // Halaman Daftar Guru
     Route::get('/', [TeacherController::class, 'index'])->name('index');
@@ -72,7 +65,7 @@ Route::prefix('teachers')->name('teachers.')->group(function () {
     Route::delete('/{id}', [TeacherController::class, 'destroy'])->name('destroy');
 });
  
-Route::name('classes.')->prefix('classes')->group(function () {
+Route::name('classes.')->middleware('role:teacher', 'auth')->prefix('classes')->group(function () {
 
     Route::get('/', IndexController::class)->name('index');
 
@@ -89,6 +82,8 @@ Route::name('classes.')->prefix('classes')->group(function () {
     Route::delete('/{id}', DestroyController::class)->name('destroy');
 });
 
+
+Route::resource('majors', MajorController::class)->middleware('role:teacher', 'auth');
 
 Route::name('majors.')->prefix('majors')->group(function () {
 
