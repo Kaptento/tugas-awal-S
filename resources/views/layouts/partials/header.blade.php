@@ -29,8 +29,10 @@
         <form action="{{ route('logout') }}" method="POST" class="hidden md:block"> 
 
           @csrf 
+          @method('DELETE')
 
           <button type="submit" class="py-2 px-4 bg-amber-800 rounded-lg cursor-pointer">Logout</button>
+        </form>
 
     </div> 
 
