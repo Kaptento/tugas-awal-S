@@ -22,7 +22,7 @@
 
             <label for="search" class="mb-1 block text-[11px] uppercase tracking-[0.15em] text-[#16213A]">Cari</label>
 
-            <input type="text" name="search" id="search" value="{{ request('search') }}" placeholder="Nama atau NIS siswa"
+            <input  type="text" name="search" id="search" value="{{ request('search') }}" placeholder="Nama atau NIS siswa"
                 class="w-full border border-[#E5E3DB] px-3 py-2 text-sm focus:border-[#16213A] focus:outline-none">
 
         </div>
@@ -37,8 +37,9 @@
                 class="border border-[#E5E3DB] px-3 py-2 text-sm focus:border-[#16213A] focus:outline-none">
 
                 <option value="">Semua Kelas</option>
-
-
+                @foreach ($schoolClasses as $class)
+                    <option @selected(request('class') === $class) value="{{ $class }}">{{ $class }}</option>
+                @endforeach
             </select>
 
         </div>
@@ -53,7 +54,9 @@
                 class="border border-[#E5E3DB] px-3 py-2 text-sm focus:border-[#16213A] focus:outline-none">
 
                 <option value="">Semua Jurusan</option>
-
+                @foreach ($majors as $major)
+                    <option @selected(request('major') === $major) value="{{ $major }}">{{ $major }}</option>
+                @endforeach
             </select>
 
         </div>
