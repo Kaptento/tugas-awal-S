@@ -12,10 +12,21 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $title = 'Sistem Sekolah - Daftar Siswa';
-        
+        $search = $request->query('search');
+        $class = $request->query('class');
+        $major = $request->query('major');
 
         $students = Student::select(['id', 'nis', 'name', 'class', 'major'])
-            ->paginate(10);
+            ->when($search, function ($query, $search) {
+                $query->where(function ($subQuery) use ($search) {
+                    $subQuery->where('name', 'like', "%{$search}%")
+                        ->orWhere('nis', 'like', "%{$search}%");
+                });
+            })
+            ->when($class, fn ($query, $class) => $query->where('class', $class))
+            ->when($major, fn ($query, $major) => $query->where('major', $major))
+            ->paginate(10)
+            ->withQueryString();
 
         $schoolClasses = ['10 AKL', '11 AKL', '12 AKL', '11 TKJ 1', '11 TKJ 2', '12 TKJ 1', '12 TKJ 2','12 TKJ 3', '10 BiD', '11 BiD', '12 BiD'];
         $majors= ['AKL', 'TKJ'];
