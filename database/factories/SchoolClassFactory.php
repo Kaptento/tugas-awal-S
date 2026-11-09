@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
 use App\Models\SchoolClass;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Model>
+ * @extends Factory<SchoolClass>
  */
-class ClassFactory extends Factory
+class SchoolClassFactory extends Factory
 {
     protected $model = SchoolClass::class;
 
