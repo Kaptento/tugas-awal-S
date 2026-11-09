@@ -22,8 +22,11 @@ class StudentFactory extends Factory
             'nis' => fake() ->unique()->numerify('####'),
             'name' => fake()->name(),
             'gender' => fake()->randomElement(['Laki-laki', 'Perempuan']),
-            'class' => fake()->randomElement(['10 AKL', '11 AKL', '12 AKL' , '10 BID', '11 BID', '12 BID' , '10 TKJ', '11 TKJ', '12 TKJ']),
-            'major' => fake()->randomElement(['AKL', 'BID', 'TKJ'])
+            'user_id'=> user::factory(),
+            'major_id'=> \App\Models\Major::factory(),
+            'class_id'=> \App\Models\SchoolClass::factory(),
+            
+
         ];
     }
 }
